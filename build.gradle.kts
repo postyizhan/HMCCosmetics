@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.hibiscusmc"
-version = "2.8.0${getGitCommitHash()}"
+version = "2.8.2${getGitCommitHash()}"
 
 allprojects {
     apply(plugin = "java")
@@ -85,6 +85,7 @@ allprojects {
             exclude(group = "com.google.code.gson")
             exclude(group = "it.unimi.dsi")
             exclude(group = "com.sk89q.jnbt")
+            exclude(group = "org.enginehub.lin-bus.format")
         }
         compileOnly("io.github.toxicity188:BetterHud-standard-api:1.12") //Standard api
         compileOnly("io.github.toxicity188:BetterHud-bukkit-api:1.12") //Platform api
@@ -94,9 +95,9 @@ allprojects {
         compileOnly("me.lojosho:HibiscusCommons:0.7.1-6c4e262c")
 
         // Handled by Spigot Library Loader
-        compileOnly("net.kyori:adventure-api:4.23.0")
-        compileOnly("net.kyori:adventure-text-minimessage:4.23.0")
-        compileOnly("net.kyori:adventure-platform-bukkit:4.4.0")
+        compileOnly("net.kyori:adventure-api:4.24.0")
+        compileOnly("net.kyori:adventure-text-minimessage:4.24.0")
+        compileOnly("net.kyori:adventure-platform-bukkit:4.4.1")
 
         annotationProcessor("org.projectlombok:lombok:1.18.36")
         testCompileOnly("org.projectlombok:lombok:1.18.36")
@@ -139,7 +140,7 @@ tasks {
     }
 
     runServer {
-        minecraftVersion("1.21.7")
+        minecraftVersion("1.21.8")
 
         downloadPlugins {
             hangar("PlaceholderAPI", "2.11.6")

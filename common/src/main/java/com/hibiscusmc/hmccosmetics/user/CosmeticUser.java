@@ -13,7 +13,6 @@ import com.hibiscusmc.hmccosmetics.cosmetic.CosmeticSlot;
 import com.hibiscusmc.hmccosmetics.cosmetic.types.CosmeticArmorType;
 import com.hibiscusmc.hmccosmetics.cosmetic.types.CosmeticBackpackType;
 import com.hibiscusmc.hmccosmetics.cosmetic.types.CosmeticBalloonType;
-import com.hibiscusmc.hmccosmetics.cosmetic.types.CosmeticMainhandType;
 import com.hibiscusmc.hmccosmetics.database.UserData;
 import com.hibiscusmc.hmccosmetics.gui.Menus;
 import com.hibiscusmc.hmccosmetics.user.manager.UserBackpackManager;
@@ -37,6 +36,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -149,6 +149,11 @@ public class CosmeticUser implements CosmeticHolder {
             MessagesUtil.sendDebugMessages("Showing Cosmetics due to world");
             showCosmetics(HiddenReason.WORLD);
         }
+
+        if (bukkitPlayer != null && bukkitPlayer.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+            hideCosmetics(HiddenReason.POTION);
+        }
+
         if (Settings.isAllPlayersHidden()) {
             hideCosmetics(HiddenReason.DISABLED);
         }
@@ -343,7 +348,7 @@ public class CosmeticUser implements CosmeticHolder {
         if (cosmetic instanceof CosmeticArmorType armorType) {
             item = armorType.getItem(this, cosmetic.getItem());
         }
-        if (cosmetic instanceof CosmeticBackpackType || cosmetic instanceof CosmeticMainhandType) {
+        if (cosmetic instanceof CosmeticBackpackType) {
             item = cosmetic.getItem();
         }
         if (cosmetic instanceof CosmeticBalloonType) {
